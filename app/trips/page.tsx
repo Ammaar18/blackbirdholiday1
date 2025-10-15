@@ -31,7 +31,7 @@ const trips: Trip[] = [
     title: "Kerala Bliss",
     description:
       "Cruise through backwaters and lush landscapes in God's Own Country.",
-    image: "/images/kerala.jpg",
+    image: "/images/Kerala.jpg",
     pdf: "/pdfs/kerala-itinerary.pdf",
   },
   {

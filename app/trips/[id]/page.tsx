@@ -17,6 +17,7 @@ import {
   Car,
   Map as MapGuide,
   Download,
+  X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -160,7 +161,7 @@ const tripsData: Record<string, Trip> = {
     name: "Kerala Backwaters & Hills",
     duration: "9 Days / 8 Nights",
     price: 14999,
-    images: ["/images/kerala.jpg", "/images/kerala1.png", "/images/kerala2.png"],
+    images: ["/images/Kerala.jpg", "/images/kerala1.png", "/images/kerala2.png"],
     highlights: ["Munnar", "Alleppey", "Thekkady", "Jatayu","varkala", "kovalam"],
     itinerary: [
       {
@@ -832,34 +833,36 @@ dodham:{
 // mapping to PDF file names in public/pdfs
 const pdfMap: Record<string, string> = {
   himachal: "/pdfs/himachal-itinerary.pdf",
-  kerala: "/pdfs/kerala-itinerary.pdf",
+  kerala: "/pdfs/Kerala-itinerary.pdf",
   kashmir: "/pdfs/kashmir-itinerary.pdf",
   uttarakhand:"/pdfs/uttarakhand-itinerary.pdf",
   chardham:"/pdfs/chardham-itinerary.pdf",
   dodham:"/pdfs/dodhaam-itinerary.pdf",
-  kedarnath:"/pdfs/kedarnath-itinerary.pdf",
+  kedarnath:"/pdfs/Kedarnath-itinerary.pdf",
 };
 
+
+
+// ================== Component ===================
 export default function TripDetailPage(): React.ReactElement {
   const { id } = useParams();
   const trip = id ? tripsData[id as keyof typeof tripsData] : undefined;
 
-  // slideshow index
   const [current, setCurrent] = useState(0);
-
-  // booking / booking-ui state (kept minimal — same UI)
   const [adults, setAdults] = useState<number>(1);
   const [children, setChildren] = useState<number>(0);
   const [selectedDate, setSelectedDate] = useState<string>("");
-
-  // download + paper-plane animation state
   const [isLaunching, setIsLaunching] = useState(false);
   const [showPlane, setShowPlane] = useState(false);
+  const [showQR, setShowQR] = useState(false);
   const planeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!trip) return;
-    const t = setInterval(() => setCurrent((s) => (trip.images ? (s + 1) % trip.images.length : 0)), 4000);
+    const t = setInterval(
+      () => setCurrent((s) => (trip.images ? (s + 1) % trip.images.length : 0)),
+      4000
+    );
     return () => clearInterval(t);
   }, [trip]);
 
@@ -873,37 +876,29 @@ export default function TripDetailPage(): React.ReactElement {
 
   const totalAmount = Math.round(trip.price * adults + trip.price * 0.5 * children);
 
-  // Launch paper plane animation then trigger download
   const handleDownloadItinerary = () => {
     const pdfPath = pdfMap[trip.id];
     if (!pdfPath) {
       alert("PDF not available for this trip.");
       return;
     }
-
-    // animate: show plane, move across screen, then trigger download
     setShowPlane(true);
     setIsLaunching(true);
-
-    // after animation ends -> create anchor and click to download
     setTimeout(() => {
-      // trigger native browser download
       const a = document.createElement("a");
       a.href = pdfPath;
       a.download = `${trip.id}-itinerary.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
-
-      // finish animation
       setIsLaunching(false);
       setTimeout(() => setShowPlane(false), 600);
-    }, 1100); // align with animation duration
+    }, 1100);
   };
 
   return (
     <main className="bg-white dark:bg-black text-gray-900 dark:text-gray-100 min-h-screen">
-      {/* FULLSCREEN HERO / SLIDESHOW */}
+      {/* HERO SECTION */}
       <section className="relative w-full h-[70vh] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
@@ -914,11 +909,21 @@ export default function TripDetailPage(): React.ReactElement {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9 }}
           >
-            <Image src={trip.images[current]} alt={trip.name} fill style={{ objectFit: "cover" }} priority />
+            <Image
+              src={trip.images[current]}
+              alt={trip.name}
+              fill
+              style={{ objectFit: "cover" }}
+              priority
+            />
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-              <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg">{trip.name}</h1>
-              <p className="text-sm md:text-lg text-gray-200 max-w-2xl mt-3">{trip.duration} • {trip.highlights.join(" • ")}</p>
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg">
+                {trip.name}
+              </h1>
+              <p className="text-sm md:text-lg text-gray-200 max-w-2xl mt-3">
+                {trip.duration} • {trip.highlights.join(" • ")}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -926,32 +931,36 @@ export default function TripDetailPage(): React.ReactElement {
 
       {/* MAIN CONTENT */}
       <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* LEFT: info + booking card */}
+        {/* SIDEBAR */}
         <aside className="md:col-span-1">
           <div className="bg-gradient-to-b from-orange-600 to-black p-6 rounded-2xl text-white sticky top-8 z-20">
             <div className="mb-4">
-              <Image src={trip.images[0]} alt={trip.name} width={600} height={400} className="w-full h-48 object-cover rounded-lg" />
+              <Image
+                src={trip.images[0]}
+                alt={trip.name}
+                width={600}
+                height={400}
+                className="w-full h-48 object-cover rounded-lg"
+              />
             </div>
-
             <h2 className="text-2xl font-extrabold">{trip.name}</h2>
             <div className="mt-2 flex items-center gap-2 text-sm text-orange-200">
               <Calendar className="w-4 h-4" />
               <span>{trip.duration}</span>
             </div>
-
             <div className="mt-3">
               <p className="text-3xl font-bold">{`₹${trip.price.toLocaleString()}`}</p>
-              <p className="text-xs text-orange-100 mt-1">All-inclusive (stay, meals & transfers) — sample pricing</p>
+              <p className="text-xs text-orange-100 mt-1">All-inclusive pricing</p>
             </div>
 
-            {/* booking mini-form */}
+            {/* Booking form */}
             <div className="mt-6 space-y-3 text-white">
               <label className="block text-sm font-semibold">Select Date</label>
               <input
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full rounded-md px-3 py-2"
+                className="w-full rounded-md px-3 py-2 text-black"
               />
 
               <div className="flex gap-3 mt-2">
@@ -961,8 +970,10 @@ export default function TripDetailPage(): React.ReactElement {
                     type="number"
                     min={1}
                     value={adults}
-                    onChange={(e) => setAdults(Math.max(1, Number(e.target.value) || 1))}
-                    className="w-full rounded-md px-3 py-2"
+                    onChange={(e) =>
+                      setAdults(Math.max(1, Number(e.target.value) || 1))
+                    }
+                    className="w-full rounded-md px-3 py-2 text-black"
                   />
                 </div>
                 <div className="w-28">
@@ -971,49 +982,42 @@ export default function TripDetailPage(): React.ReactElement {
                     type="number"
                     min={0}
                     value={children}
-                    onChange={(e) => setChildren(Math.max(0, Number(e.target.value) || 0))}
-                    className="w-full rounded-md px-3 py-2"
+                    onChange={(e) =>
+                      setChildren(Math.max(0, Number(e.target.value) || 0))
+                    }
+                    className="w-full rounded-md px-3 py-2 text-black"
                   />
                 </div>
               </div>
 
               <div className="mt-3">
                 <p className="font-semibold">Total</p>
-                <p className="text-2xl font-extrabold">₹{totalAmount.toLocaleString()}</p>
+                <p className="text-2xl font-extrabold">
+                  ₹{totalAmount.toLocaleString()}
+                </p>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-4">
                 <Button
                   onClick={() => {
                     if (!selectedDate) {
                       alert("Select a date first.");
                       return;
                     }
-                    // open QR flow / booking UI that you already have elsewhere — show QR overlay if needed.
-                    // Keep consistent UI: we'll re-use the QR animation you implemented earlier in your app.
-                    alert("Book flow triggered (QR popup will appear)."); // placeholder: your existing QR behavior will run
+                    setShowQR(true);
                   }}
-                  className="col-span-2 bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 rounded-xl"
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 rounded-xl"
                 >
                   Book Now
                 </Button>
-
-                {/* <button
-                  onClick={handleDownloadItinerary}
-                  className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/90 hover:bg-white text-black font-semibold"
-                >
-                  <Download className="w-4 h-4" />
-                  Download Itinerary
-                </button> */}
               </div>
             </div>
           </div>
         </aside>
 
-        {/* RIGHT: itinerary (spans two columns on md+) */}
+        {/* ITINERARY SECTION */}
         <article className="md:col-span-2">
           <h3 className="text-2xl font-bold text-orange-500 mb-4">Detailed Itinerary</h3>
-
           <div className="space-y-6">
             {trip.itinerary.map((d) => (
               <motion.div
@@ -1044,7 +1048,7 @@ export default function TripDetailPage(): React.ReactElement {
             ))}
           </div>
 
-          {/* download CTA repeated after itinerary */}
+          {/* Download CTA */}
           <div className="mt-8 flex gap-3">
             <button
               onClick={handleDownloadItinerary}
@@ -1053,7 +1057,6 @@ export default function TripDetailPage(): React.ReactElement {
               <Download className="w-4 h-4" />
               Download Full PDF Itinerary
             </button>
-
             <button
               onClick={() => window.print()}
               className="flex items-center gap-2 rounded-xl border border-orange-600 text-orange-400 px-5 py-3"
@@ -1064,25 +1067,63 @@ export default function TripDetailPage(): React.ReactElement {
         </article>
       </section>
 
-      {/* --- PAPER PLANE ANIMATION ELEMENT (absolute) --- */}
+      {/* ===== QR Modal ===== */}
+      {showQR && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-[10000]">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl max-w-sm w-full text-center relative">
+            <button
+              onClick={() => setShowQR(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-black dark:hover:text-white"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h2 className="text-xl font-bold mb-3 text-orange-500">Scan to Book</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              Use any UPI / payment scanner to complete your booking.
+            </p>
+
+            <div className="border-2 border-orange-500 rounded-xl p-3 bg-white dark:bg-gray-800">
+              <Image
+                src="/images/qr1.jpg"
+                alt="Booking QR"
+                width={200}
+                height={200}
+                className="mx-auto"
+              />
+            </div>
+
+            <p className="text-xs text-gray-500 mt-4">
+              Once payment is done, our team will confirm your booking via WhatsApp 📩
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Paper plane animation */}
       {showPlane && (
         <div className="pointer-events-none fixed inset-0 z-[9999]">
           <motion.div
             ref={planeRef}
-            initial={{ x: -80, y: window ? window.innerHeight / 2 - 80 : 200, rotate: -15, scale: 0.9 }}
-            animate={{ x: window ? window.innerWidth + 40 : 1200, y: 40, rotate: 0, scale: 0.5 }}
+            initial={{ x: -80, y: window.innerHeight / 2 - 80, rotate: -15, scale: 0.9 }}
+            animate={{ x: window.innerWidth + 40, y: 40, rotate: 0, scale: 0.5 }}
             transition={{ duration: 1.05, ease: "easeInOut" }}
             className="absolute"
           >
-            {/* simple paper plane SVG */}
-            <svg width="84" height="84" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
+            <svg
+              width="84"
+              height="84"
+              viewBox="0 0 64 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="drop-shadow-2xl"
+            >
               <path d="M2 30L62 2L34 62L26 38L2 30Z" fill="#FF7A00" stroke="#fff" strokeWidth="1.5" />
             </svg>
           </motion.div>
         </div>
       )}
 
-      {/* Sidebar (drawer) preserved same as your UI */}
       <SidebarDemo />
     </main>
   );

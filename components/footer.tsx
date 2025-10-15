@@ -23,23 +23,23 @@ export default function Footer() {
         {/* Center Social Links */}
         <div className="flex items-center gap-6">
           <Link
-            href="https://www.instagram.com/blackbird_holidays"
+            href="https://www.instagram.com/blackbird_holiday"
             target="_blank"
             aria-label="Instagram"
             className="flex items-center gap-2 text-gray-300 hover:text-orange-400 transition-all"
           >
             <Instagram className="w-5 h-5" />
-            <span>@blackbird_holidays</span>
+            <span>@blackbird_holiday</span>
           </Link>
 
           <Link
-            href="https://www.facebook.com/blackbird_holidays"
+            href="https://www.facebook.com/blackbird holiday"
             target="_blank"
             aria-label="Facebook"
             className="flex items-center gap-2 text-gray-300 hover:text-orange-400 transition-all"
           >
             <Facebook className="w-5 h-5" />
-            <span>Blackbird Holidays</span>
+            <span>Blackbird Holiday</span>
           </Link>
         </div>
 
