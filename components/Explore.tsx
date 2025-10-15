@@ -33,7 +33,7 @@ const cardVariant = {
 
 export default function ExploreSection() {
   const cards = [
-    { title: "Kerala", img: "/images/kerala.jpg", id: "kerala" },
+    { title: "Kerala", img: "/images/Kerala.jpg", id: "kerala" },
     { title: "Himachal", img: "/images/himachal.jpg", id: "himachal" },
     { title: "Kashmir", img: "/images/kashmir.jpeg", id: "kashmir" },
     { title: "Spiti", img: "/images/spiti.jpg", id: "spiti" },
