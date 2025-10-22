@@ -161,7 +161,7 @@ const tripsData: Record<string, Trip> = {
     name: "Kerala Backwaters & Hills",
     duration: "9 Days / 8 Nights",
     price: 14999,
-    images: ["/images/Kerala.jpg", "/images/kerala1.png", "/images/kerala2.png"],
+    images: ["/images/kerala.jpg", "/images/kerala1.png", "/images/kerala2.png"],
     highlights: ["Munnar", "Alleppey", "Thekkady", "Jatayu","varkala", "kovalam"],
     itinerary: [
       {

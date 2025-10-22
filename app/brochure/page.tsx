@@ -17,7 +17,7 @@ const brochures = [
     id: "kerala",
     title: "Kerala Itinerary",
     file: "/Pdfs/Kerala-itinerary.pdf",
-    image: "/images/kerala1.png",
+    image: "/images/kerala.jpg",
   },
   {
     id: "spiti",
