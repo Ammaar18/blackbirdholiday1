@@ -10,7 +10,7 @@ const brochures = [
   {
     id: "himachal",
     title: "Himachal Itinerary",
-    file: "/Pdfs/himachal-itinerary.pdf",
+    file: "public/Pdfs/himachal-itinerary.pdf",
     image: "/images/himachal.jpg",
   },
   {
@@ -22,7 +22,7 @@ const brochures = [
   {
     id: "spiti",
     title: "Spiti Itinerary",
-    file: "/Pdfs/Spiti-itinerary.pdf",
+    file: "public/Pdfs/Spiti-itinerary.pdf",
     image: "/images/spiti.jpg",
   },
   {
