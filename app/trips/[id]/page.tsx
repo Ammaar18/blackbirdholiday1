@@ -932,88 +932,88 @@ export default function TripDetailPage(): React.ReactElement {
       {/* MAIN CONTENT */}
       <section className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* SIDEBAR */}
-        <aside className="md:col-span-1">
-          <div className="bg-gradient-to-b from-orange-600 to-black p-6 rounded-2xl text-white sticky top-8 z-20">
-            <div className="mb-4">
-              <Image
-                src={trip.images[0]}
-                alt={trip.name}
-                width={600}
-                height={400}
-                className="w-full h-48 object-cover rounded-lg"
-              />
-            </div>
-            <h2 className="text-2xl font-extrabold">{trip.name}</h2>
-            <div className="mt-2 flex items-center gap-2 text-sm text-orange-200">
-              <Calendar className="w-4 h-4" />
-              <span>{trip.duration}</span>
-            </div>
-            <div className="mt-3">
-              <p className="text-3xl font-bold">{`₹${trip.price.toLocaleString()}`}</p>
-              <p className="text-xs text-orange-100 mt-1">All-inclusive pricing</p>
-            </div>
+<aside className="md:col-span-1">
+  <div className="bg-gradient-to-b from-orange-600 to-black p-6 rounded-2xl text-white sticky top-8 z-20">
+    <div className="mb-4">
+      <Image
+        src={trip.images[0]}
+        alt={trip.name}
+        width={600}
+        height={400}
+        className="w-full h-48 object-cover rounded-lg"
+      />
+    </div>
+    <h2 className="text-2xl font-extrabold">{trip.name}</h2>
+    <div className="mt-2 flex items-center gap-2 text-sm text-orange-200">
+      <Calendar className="w-4 h-4 text-white" /> {/* White calendar icon */}
+      <span>{trip.duration}</span>
+    </div>
+    <div className="mt-3">
+      <p className="text-3xl font-bold">{`₹${trip.price.toLocaleString()}`}</p>
+      <p className="text-xs text-orange-100 mt-1">All-inclusive pricing</p>
+    </div>
 
-            {/* Booking form */}
-            <div className="mt-6 space-y-3 text-white">
-              <label className="block text-sm font-semibold">Select Date</label>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full rounded-md px-3 py-2 text-black"
-              />
+    {/* Booking form */}
+    <div className="mt-6 space-y-3 text-white">
+      <label className="block text-sm font-semibold">Select Date</label>
+      <div className="relative">
+        <input
+          type="date"
+          value={selectedDate}
+          min={new Date().toISOString().split("T")[0]} // prevents past dates
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="w-full rounded-md px-3 py-2 text-white pr-10"
+        />
+        <Calendar className="absolute right-3 top-2.5 w-4 h-4 text-white pointer-events-none" />
+      </div>
 
-              <div className="flex gap-3 mt-2">
-                <div className="flex-1">
-                  <label className="text-sm font-semibold">Adults</label>
-                  <input
-                    type="number"
-                    min={1}
-                    value={adults}
-                    onChange={(e) =>
-                      setAdults(Math.max(1, Number(e.target.value) || 1))
-                    }
-                    className="w-full rounded-md px-3 py-2 text-black"
-                  />
-                </div>
-                <div className="w-28">
-                  <label className="text-sm font-semibold">Children</label>
-                  <input
-                    type="number"
-                    min={0}
-                    value={children}
-                    onChange={(e) =>
-                      setChildren(Math.max(0, Number(e.target.value) || 0))
-                    }
-                    className="w-full rounded-md px-3 py-2 text-black"
-                  />
-                </div>
-              </div>
+      <div className="flex gap-3 mt-2">
+        <div className="flex-1">
+          <label className="text-sm font-semibold">Adults</label>
+          <input
+            type="number"
+            min={1}
+            value={adults}
+            onChange={(e) => setAdults(Math.max(1, Number(e.target.value) || 1))}
+            className="w-full rounded-md px-3 py-2 text-white"
+          />
+        </div>
+        {/* <div className="w-28">
+          <label className="text-sm font-semibold">Children</label>
+          <input
+            type="number"
+            min={0}
+            value={children}
+            onChange={(e) =>
+              setChildren(Math.max(0, Number(e.target.value) || 0))
+            }
+            className="w-full rounded-md px-3 py-2 text-white"
+          />
+        </div> */}
+      </div>
 
-              <div className="mt-3">
-                <p className="font-semibold">Total</p>
-                <p className="text-2xl font-extrabold">
-                  ₹{totalAmount.toLocaleString()}
-                </p>
-              </div>
+      <div className="mt-3">
+        <p className="font-semibold">Total</p>
+        <p className="text-2xl font-extrabold">₹{totalAmount.toLocaleString()}</p>
+      </div>
 
-              <div className="mt-4">
-                <Button
-                  onClick={() => {
-                    if (!selectedDate) {
-                      alert("Select a date first.");
-                      return;
-                    }
-                    setShowQR(true);
-                  }}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 rounded-xl"
-                >
-                  Book Now
-                </Button>
-              </div>
-            </div>
-          </div>
-        </aside>
+      <div className="mt-4">
+        <Button
+          onClick={() => {
+            if (!selectedDate) {
+              alert("Please select a valid date first.");
+              return;
+            }
+            setShowQR(true);
+          }}
+          className="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-2 rounded-xl"
+        >
+          Book Now
+        </Button>
+      </div>
+    </div>
+  </div>
+</aside>
 
         {/* ITINERARY SECTION */}
         <article className="md:col-span-2">
@@ -1050,13 +1050,13 @@ export default function TripDetailPage(): React.ReactElement {
 
           {/* Download CTA */}
           <div className="mt-8 flex gap-3">
-            <button
+            {/* <button
               onClick={handleDownloadItinerary}
               className="flex items-center gap-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-black font-bold px-5 py-3"
             >
               <Download className="w-4 h-4" />
               Download Full PDF Itinerary
-            </button>
+            </button> */}
             <button
               onClick={() => window.print()}
               className="flex items-center gap-2 rounded-xl border border-orange-600 text-orange-400 px-5 py-3"
@@ -1115,7 +1115,7 @@ export default function TripDetailPage(): React.ReactElement {
               height="84"
               viewBox="0 0 64 64"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              xmlns="http://www.w3.or`g/2000/svg"
               className="drop-shadow-2xl"
             >
               <path d="M2 30L62 2L34 62L26 38L2 30Z" fill="#FF7A00" stroke="#fff" strokeWidth="1.5" />

@@ -1,6 +1,6 @@
 "use client";
-import { useParams } from "next/navigation";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   IconMenu2,
@@ -8,41 +8,63 @@ import {
   IconHome,
   IconPlane,
   IconFileText,
-  IconLogin,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function SidebarDemo() {
   const [open, setOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
   const isHome = pathname === "/";
 
   const links = [
     { label: "Home", href: "/", icon: <IconHome className="h-5 w-5" /> },
     { label: "Trips", href: "/trips", icon: <IconPlane className="h-5 w-5" /> },
+    { label: "Brochure", href: "/brochure", icon: <IconFileText className="h-5 w-5" /> },
   ];
+
+  // 👇 Detect scroll direction to show/hide header
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setShowHeader(false); // hide when scrolling down
+      } else {
+        setShowHeader(true); // show when scrolling up
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  // 👇 Smooth scroll to top when clicking the brand name
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <>
       {/* --- Top Bar --- */}
       <motion.header
+        initial={{ y: 0 }}
+        animate={{ y: showHeader ? 0 : -100 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         className={`fixed top-0 left-0 z-50 flex w-full items-center justify-between px-6 py-4 md:px-10 transition-all duration-300 ${
           open ? "backdrop-blur-lg bg-black/30" : "bg-transparent"
         }`}
-        animate={{ opacity: open ? 0.9 : 1 }}
       >
-        {/* ✅ Show name only on Home */}
+        {/* ✅ Brand Name (only on Home) */}
         {isHome ? (
-          <div className="flex items-center gap-2">
-            {/* <Image
-              src="/images/blackbird-removebg.png"
-              alt="BlackBird Logo"
-              width={40}
-              height={40}
-              className="object-contain"
-            /> */}
-            <span className="text-xl font-bold bg-orange-500 bg-clip-text text-transparent">
+          <div
+            onClick={handleScrollToTop}
+            className="flex items-center gap-2 cursor-pointer select-none"
+          >
+            <span className="text-xl font-bold bg-gradient-to-r from-white to-orange-500 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
               BlackBird Holiday
             </span>
           </div>
@@ -92,7 +114,7 @@ export default function SidebarDemo() {
 
               {/* Drawer Content */}
               <div className="flex h-full flex-col items-center justify-center space-y-10">
-                {/* Logo Only */}
+                {/* Logo */}
                 <Image
                   src="/images/blackbird-removebg.png"
                   alt="BlackBird Logo"
@@ -104,15 +126,17 @@ export default function SidebarDemo() {
                 {/* Navigation Links */}
                 <nav className="flex flex-col items-center space-y-5">
                   {links.map((link, idx) => (
-                    <a
+                    <Link
                       key={idx}
                       href={link.href}
-                      className="flex items-center space-x-2 text-white/90 hover:text-orange-400 transition-colors duration-300"
+                      className={`flex items-center space-x-2 text-white/90 hover:text-orange-400 transition-colors duration-300 ${
+                        pathname === link.href ? "text-orange-400 font-semibold" : ""
+                      }`}
                       onClick={() => setOpen(false)}
                     >
                       {link.icon}
                       <span className="text-base font-medium">{link.label}</span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
