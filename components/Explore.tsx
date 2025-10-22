@@ -37,7 +37,7 @@ export default function ExploreSection() {
     { title: "Himachal", img: "/images/himachal.jpg", id: "himachal" },
     { title: "Kashmir", img: "/images/kashmir.jpeg", id: "kashmir" },
     { title: "Spiti", img: "/images/spiti.jpg", id: "spiti" },
-    { title: "Rajasthan", img: "/images/rajasthan1.jpg", id: "rajasthan" },
+    { title: "Uttarakhand", img: "/images/uttarakhand.png", id: "uttarakhand" },
   ];
 
   const sectionRef = useRef<HTMLElement | null>(null);

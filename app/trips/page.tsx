@@ -71,6 +71,13 @@ const trips: Trip[] = [
     image: "/images/Kedarnath.jpg",
     pdf: "/pdfs/Kedarnath-Itenarary.pdf",
   },
+ {
+  id: "spiti",
+  title: "Spiti Valley Expedition",
+  description: "Embark on a high-altitude Himalayan adventure through ancient monasteries, surreal landscapes, and remote villages in the heart of Himachal Pradesh.",
+  image: "/images/spiti.jpg",
+  pdf: "/pdfs/Spiti-itenerary.pdf"
+},
 ];
 
 export default function TripsPage() {

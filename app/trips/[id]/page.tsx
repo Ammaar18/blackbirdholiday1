@@ -826,6 +826,131 @@ dodham:{
   ],
 },
 
+spiti: {
+  id: "spiti",
+  name: "Spiti Valley Expedition",
+  duration: "11 Days / 10 Nights",
+  price: 20899,
+  images: ["/images/spiti.jpg", "/images/spiti1.png", "/images/spiti2.png"],
+  highlights: [
+    "Shimla", "Chitkul", "Kalpa", "Nako", "Tabo", "Dhankar",
+    "Kaza", "Hikkim", "Langza", "Komic", "Key Monastery",
+    "Chicham Bridge", "Kunzum Pass", "Chandratal", "Manali"
+  ],
+  itinerary: [
+    {
+      day: 1,
+      title: "Mumbai → Chandigarh (Train Journey)",
+      desc:
+        "Meet and greet at Mumbai Central or Borivali Railway Station at 11:00 AM. Begin your journey towards Chandigarh or Ambala aboard the Paschim Express. Spend the day bonding with fellow travelers, playing games, and breaking the ice as the adventure begins.",
+      accommodation: false,
+      transport: true,
+      meals: false,
+      guide: true,
+    },
+    {
+      day: 2,
+      title: "Reach Chandigarh → Drive to Shimla",
+      desc:
+        "Arrive in Chandigarh by 4:30 PM and kick off the road trip to Shimla. Enjoy the scenic drive through the hills and reach Shimla by 11:00 PM. Check into the hotel, have dinner, and rest well to prepare for the adventure ahead.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 3,
+      title: "Shimla → Chitkul",
+      desc:
+        "Begin the journey from Shimla to Chitkul, traveling alongside the Satluj River before turning towards the Baspa River. Chitkul, the last inhabited village before the Indo-China border, offers stunning views and serene vibes. Enjoy dinner and overnight stay in this remote Himalayan hamlet.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 4,
+      title: "Explore Chitkul → Drive to Kalpa",
+      desc:
+        "Spend the morning exploring Chitkul, savoring 'pahadon wali Maggi' by the riverside. If time permits, visit Sangla village in the Kinnaur Valley. Later, drive to Kalpa for an overnight stay amidst majestic views of Mt. Kinner Kailash.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 5,
+      title: "Kalpa → Nako → Tabo",
+      desc:
+        "Wake up to breathtaking views of Mt. Kinner Kailash. En route to Nako, visit Khab Sangam — the confluence of Satluj and Spiti Rivers. Explore Nako Lake and Gue village before entering Spiti Valley via Sumdo. Reach Tabo by evening and settle in for the night.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 6,
+      title: "Tabo → Dhankar → Kaza",
+      desc:
+        "Discover the mystical village of Tabo, home to a monastery over 1,025 years old. Visit nearby caves and interact with locals. Continue to Dhankar Monastery perched dramatically on a cliff, then head to Kaza — the headquarters of Spiti Valley — for a multi-night stay.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 7,
+      title: "Kaza → Hikkim → Komic → Langza → Key Monastery",
+      desc:
+        "Explore Spiti’s iconic high-altitude villages. Visit Key Monastery, dramatically built on a hilltop. Head to Hikkim to post letters from the world’s highest post office, then to Komic — the world’s highest village. End the day at Langza, known for its ancient marine fossils.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 8,
+      title: "Kaza → Chicham Bridge → Kunzum Pass → Chandratal",
+      desc:
+        "Take a morning walk in Kaza to soak in the beauty one last time. Drive via the thrilling Chicham Bridge and cross Kunzum Pass to reach Chandratal Lake. Check into camps by evening and enjoy stargazing under the pristine Himalayan sky.",
+      accommodation: true,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 9,
+      title: "Chandratal → Manali → Overnight to Chandigarh",
+      desc:
+        "Wake up early to explore the ethereal Chandratal Lake. Later, drive to Manali and explore Old Manali’s cafes, Tibetan Monastery, and Mall Road (time permitting). Begin the overnight journey to Chandigarh or Ambala.",
+      accommodation: false,
+      transport: true,
+      meals: true,
+      guide: true,
+    },
+    {
+      day: 10,
+      title: "Chandigarh → Mumbai (Train Journey)",
+      desc:
+        "Board the train from Chandigarh or Ambala to Mumbai in the afternoon. Spend the day relaxing and reminiscing about the trip with your travel companions.",
+      accommodation: false,
+      transport: true,
+      meals: false,
+      guide: false,
+    },
+    {
+      day: 11,
+      title: "Arrival — Mumbai",
+      desc:
+        "Reach Mumbai with unforgettable memories of the Spiti Valley expedition — a journey through majestic landscapes, ancient monasteries, and high-altitude villages.",
+      accommodation: false,
+      transport: true,
+      meals: false,
+      guide: false,
+    },
+  ],
+}
+
 
 }
 

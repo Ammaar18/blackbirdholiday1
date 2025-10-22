@@ -21,10 +21,10 @@ export default function StatsStrip() {
       }, 30);
     };
 
-    animateValue(setParticipants, 220000, 1800);
-    setTimeout(() => animateValue(setAwards, 50, 1500), 200);
-    setTimeout(() => animateValue(setTreks, 120, 1500), 400);
-    setTimeout(() => animateValue(setYears, 15, 1500), 600);
+    animateValue(setParticipants, 22000, 1800);
+    setTimeout(() => animateValue(setAwards, 30, 1500), 200);
+    setTimeout(() => animateValue(setTreks, 100, 1500), 400);
+    setTimeout(() => animateValue(setYears, 5, 1500), 600);
   }, []);
 
   const stats = [
@@ -50,8 +50,10 @@ export default function StatsStrip() {
     },
   ];
 
-  const numberClass = "text-lg sm:text-2xl font-bold text-white";
-  const labelClass = "text-xs sm:text-sm text-gray-300 opacity-90";
+  const numberClass =
+    "text-lg sm:text-2xl font-bold text-white text-center leading-tight";
+  const labelClass =
+    "text-[10px] sm:text-sm text-gray-300 opacity-90 text-center leading-tight break-words max-w-[80px]";
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.9 },
@@ -60,7 +62,7 @@ export default function StatsStrip() {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring", // ✅ valid type
+        type: "spring",
         stiffness: 80,
         damping: 12,
         duration: 0.6,
@@ -87,7 +89,7 @@ export default function StatsStrip() {
               <motion.div
                 key={i}
                 variants={itemVariants}
-                className="flex flex-col items-center gap-2"
+                className="flex flex-col items-center justify-center gap-2 text-center w-full"
               >
                 {item.icon}
                 <motion.div

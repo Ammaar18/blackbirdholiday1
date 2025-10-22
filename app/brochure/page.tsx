@@ -17,7 +17,7 @@ const brochures = [
     id: "kerala",
     title: "Kerala Itinerary",
     file: "/Pdfs/Kerala-itinerary.pdf",
-    image: "/images/kerala.jpg",
+    image: "/images/kerala1.png",
   },
   {
     id: "spiti",
@@ -41,13 +41,13 @@ const brochures = [
     id: "uttarakhand",
     title: "Uttarakhand Itinerary",
     file: "/Pdfs/Uttarakhand-itinerary.pdf",
-    image: "/images/uttarakhand.jpg",
+    image: "/images/uttarakhand.png",
   },
   {
     id: "dodhaam",
     title: "Dodhaam Itinerary",
     file: "/Pdfs/dodhaam-itinerary.pdf",
-    image: "/images/dodhaam.jpg",
+    image: "/images/do dhaam.jpg",
   },
   {
     id: "chardham",

@@ -8,6 +8,7 @@ import {
   IconHome,
   IconPlane,
   IconFileText,
+  IconLayoutDashboard,
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,13 +21,16 @@ export default function SidebarDemo() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  const links = [
-    { label: "Home", href: "/", icon: <IconHome className="h-5 w-5" /> },
-    { label: "Trips", href: "/trips", icon: <IconPlane className="h-5 w-5" /> },
-    { label: "Brochure", href: "/brochure", icon: <IconFileText className="h-5 w-5" /> },
-  ];
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // 👇 Detect scroll direction to show/hide header
+  // ✅ Detect admin mode from localStorage (only you can enable it)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsAdmin(localStorage.getItem("blackbird_isAdmin") === "1");
+    }
+  }, []);
+
+  // ✅ Detect scroll direction to show/hide header
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -42,10 +46,26 @@ export default function SidebarDemo() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // 👇 Smooth scroll to top when clicking the brand name
+  // ✅ Smooth scroll to top when clicking the brand name
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // ✅ Nav links (Dashboard only visible to admin)
+  const links = [
+    { label: "Home", href: "/", icon: <IconHome className="h-5 w-5" /> },
+    { label: "Trips", href: "/trips", icon: <IconPlane className="h-5 w-5" /> },
+    { label: "Brochure", href: "/brochure", icon: <IconFileText className="h-5 w-5" /> },
+    ...(isAdmin
+      ? [
+          {
+            label: "Dashboard",
+            href: "/dashboard",
+            icon: <IconLayoutDashboard className="h-5 w-5" />,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <>
@@ -58,7 +78,7 @@ export default function SidebarDemo() {
           open ? "backdrop-blur-lg bg-black/30" : "bg-transparent"
         }`}
       >
-        {/* ✅ Brand Name (only on Home) */}
+        {/* ✅ Brand Name (always visible on Home) */}
         {isHome ? (
           <div
             onClick={handleScrollToTop}
