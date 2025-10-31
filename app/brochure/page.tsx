@@ -10,49 +10,49 @@ const brochures = [
   {
     id: "himachal",
     title: "Himachal Itinerary",
-    file: "/pdfs/himachal-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/himachal-itinerary.pdf",
     image: "/images/himachal.jpg",
   },
   {
     id: "kerala",
     title: "Kerala Itinerary",
-    file: "/pdfs/Kerala-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/kerala-Itinerary.pdf",
     image: "/images/Kerala.jpg",
   },
   {
     id: "spiti",
     title: "Spiti Itinerary",
-    file: "/pdfs/Spiti-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/spiti-itenerary.pdf",
     image: "/images/spiti.jpg",
   },
   {
     id: "coorg",
     title: "Coorg Itinerary",
-    file: "/pdfs/Coorg-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/coorg-Itinerary.pdf",
     image: "/images/coorg.png",
   },
   {
     id: "kedarnath",
     title: "Kedarnath Itinerary",
-    file: "/pdfs/Kedarnath-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/kedarnath-itinerary.pdf",
     image: "/images/kedarnath.jpg",
   },
   {
     id: "uttarakhand",
     title: "Uttarakhand Itinerary",
-    file: "/pdfs/Uttarakhand-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/uttarakhand-iternerary.pdf",
     image: "/images/uttarakhand.png",
   },
   {
     id: "dodhaam",
     title: "Dodhaam Itinerary",
-    file: "/pdfs/dodhaam-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/dodhaam-Itenarary.pdf",
     image: "/images/do dhaam.jpg",
   },
   {
     id: "chardham",
     title: "Chardham Itinerary",
-    file: "/pdfs/chardham-itinerary.pdf",
+    file: "https://kkewfnr9a7tbzinf.public.blob.vercel-storage.com/pdfs/chardham-itinerary.pdf",
     image: "/images/chardham.jpg",
   },
 ];
@@ -63,13 +63,11 @@ export default function BrochurePage() {
   const handleDownload = (id: string, file: string) => {
     setFly(id);
 
-    const link = document.createElement("a");
-    link.href = file;
-    link.setAttribute("download", "");
-    link.setAttribute("target", "_blank");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const a = document.createElement("a");
+    a.href = file;
+    a.target = "_blank";
+    a.download = "";
+    a.click();
 
     setTimeout(() => setFly(null), 1200);
   };
