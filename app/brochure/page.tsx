@@ -16,38 +16,38 @@ const brochures = [
   {
     id: "kerala",
     title: "Kerala Itinerary",
-    file: "/pdfs/Kerala-itinerary.pdf",
-    image: "/images/Kerala.jpg",
+    file: "/pdfs/kerala-itinerary.pdf",
+    image: "/images/kerala.jpg",
   },
   {
     id: "spiti",
     title: "Spiti Itinerary",
-    file: "/pdfs/Spiti-itinerary.pdf",
+    file: "/pdfs/spiti-itinerary.pdf",
     image: "/images/spiti.jpg",
   },
   {
     id: "coorg",
     title: "Coorg Itinerary",
-    file: "/pdfs/Coorg-itinerary.pdf",
+    file: "/pdfs/coorg-itinerary.pdf",
     image: "/images/coorg.png",
   },
   {
     id: "kedarnath",
     title: "Kedarnath Itinerary",
-    file: "/pdfs/Kedarnath-itinerary.pdf",
+    file: "/pdfs/kedarnath-itinerary.pdf",
     image: "/images/kedarnath.jpg",
   },
   {
     id: "uttarakhand",
     title: "Uttarakhand Itinerary",
-    file: "/pdfs/Uttarakhand-itinerary.pdf",
+    file: "/pdfs/uttarakhand-itinerary.pdf",
     image: "/images/uttarakhand.png",
   },
   {
-    id: "dodhaam",
+    id: "dodham",
     title: "Dodhaam Itinerary",
     file: "/pdfs/dodhaam-itinerary.pdf",
-    image: "/images/do dhaam.jpg",
+    image: "/images/dodhaam.jpg",
   },
   {
     id: "chardham",
@@ -64,9 +64,12 @@ export default function BrochurePage() {
     setFly(id);
     const link = document.createElement("a");
     link.href = file;
-    link.download = file.split("/").pop() || "brochure.pdf";
+    link.setAttribute("download", file.split("/").pop() ?? "brochure.pdf");
+    document.body.appendChild(link); // ✅ more reliable
     link.click();
-    setTimeout(() => setFly(null), 1200); // reset after animation
+    document.body.removeChild(link);
+
+    setTimeout(() => setFly(null), 1200);
   };
 
   return (
