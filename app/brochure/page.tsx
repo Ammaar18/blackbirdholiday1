@@ -47,7 +47,7 @@ const brochures = [
     id: "dodhaam",
     title: "Dodhaam Itinerary",
     file: "/pdfs/dodhaam-itinerary.pdf",
-    image: "/images/do dhaam.jpg",
+    image: "/images/dodhaam.jpg",
   },
   {
     id: "chardham",
