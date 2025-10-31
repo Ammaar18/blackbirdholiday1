@@ -16,7 +16,7 @@ const brochures = [
   {
     id: "kerala",
     title: "Kerala Itinerary",
-    file: "/pdfs/kerala-itinerary.pdf",
+    file: "/pdfs/Kerala-itinerary.pdf",
     image: "/images/Kerala.jpg",
   },
   {
@@ -47,7 +47,7 @@ const brochures = [
     id: "dodhaam",
     title: "Dodhaam Itinerary",
     file: "/pdfs/dodhaam-itinerary.pdf",
-    image: "/images/dodhaam.jpg",
+    image: "/images/do dhaam.jpg",
   },
   {
     id: "chardham",
@@ -63,11 +63,10 @@ export default function BrochurePage() {
   const handleDownload = (id: string, file: string) => {
     setFly(id);
 
-    const downloadUrl = `/api/download?file=${encodeURIComponent(file)}`;
     const link = document.createElement("a");
-
-    link.href = downloadUrl;
-    link.setAttribute("download", file.split("/").pop() ?? "brochure.pdf");
+    link.href = file;
+    link.setAttribute("download", "");
+    link.setAttribute("target", "_blank");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
