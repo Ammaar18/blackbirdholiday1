@@ -155,7 +155,7 @@ export default function TripsPage() {
                   </CardItem>
                 </Link>
 
-                <button
+                {/* <button
                   onClick={() => handleDownload(trip)}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-700 text-white text-sm font-semibold hover:opacity-90 transition relative overflow-hidden"
                 >
@@ -174,7 +174,7 @@ export default function TripsPage() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </button>
+                </button> */}
               </div>
             </CardBody>
           </CardContainer>
