@@ -61,14 +61,14 @@ const trips: Trip[] = [
     id: "dodham",
     title: "DoDham Yatra",
     description: "Shrines are the best place to relax.",
-    image: "/images/do dhaam.jpg",
+    image: "/images/dodhaam.jpg",
     pdf: "/pdfs/dodhaam-itinerary.pdf",
   },
   {
     id: "kedarnath",
     title: "Kedarnath",
     description: "Seek blessings at one of the holiest shrines in India.",
-    image: "/images/Kedarnath.jpg",
+    image: "/images/kedarnath.jpg",
     pdf: "/pdfs/Kedarnath-Itenarary.pdf",
   },
  {
